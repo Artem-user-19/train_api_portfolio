@@ -1,0 +1,78 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environment
+env/
+venv/
+ENV/
+.venv/
+
+# VS Code settings
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# Linux and macOS swap files
+*.swp
+*.swo
+*~
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+
+# Distribution / packaging
+.Python
+pip-wheel-metadata/
+*.whl
+
+# SQLite database
+*.sqlite3
+*.db
+
+# Logs and local runtime files
+*.log
+*.pid
+*.out
+*.err
+
+# Secret or config files (add these if present)
+.env
+config/settings_local.py
+.envrc
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Pytest cache and coverage files
+.pytest_cache/
+.coverage
+htmlcov/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+.dmypy/
+
+# pyenv
+.python-version
+
+# Celery beat schedule files
+celerybeat-schedule
+
+# Editor backup files
+*.bak
+*.backup
