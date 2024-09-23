@@ -4,7 +4,18 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import TrainType, Train, Station, Route, Crew, Journey, Order, Ticket, Country, City
+from .models import (
+    TrainType,
+    Train,
+    Station,
+    Route,
+    Crew,
+    Journey,
+    Order,
+    Ticket,
+    Country,
+    City
+)
 from .serializers import (
     TrainTypeSerializer,
     TrainSerializer,
