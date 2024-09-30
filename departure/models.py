@@ -1,4 +1,5 @@
 from django.db import models
+
 from django.contrib.auth.models import User
 
 
@@ -13,7 +14,7 @@ class Train(models.Model):
     name = models.CharField(max_length=100)
     cargo_num = models.IntegerField()
     places_in_cargo = models.IntegerField()
-    train_type = models.ForeignKey(TrainType, on_delete=models.CASCADE)
+    train_type = models.ForeignKey(TrainType, on_delete=models.CASCADE, related_name='trains')
 
     def __str__(self):
         return self.name
@@ -28,7 +29,7 @@ class Country(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=100)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='cities')
 
     def __str__(self):
         return self.name
@@ -44,10 +45,11 @@ class Station(models.Model):
 
 
 class Route(models.Model):
-    source = models.ForeignKey(Station,
-                               related_name='source_station',
-                               on_delete=models.CASCADE
-                               )
+    source = models.ForeignKey(
+        Station,
+        related_name='source_station',
+        on_delete=models.CASCADE,
+    )
     destination = models.ForeignKey(
         Station,
         related_name='destination_station',
@@ -65,19 +67,19 @@ class Crew(models.Model):
 
 
 class Journey(models.Model):
-    route = models.ForeignKey(Route, on_delete=models.CASCADE)
-    train = models.ForeignKey(Train, on_delete=models.CASCADE)
+    route = models.ForeignKey(Route, on_delete=models.CASCADE, related_name='routes')
+    train = models.ForeignKey(Train, on_delete=models.CASCADE, related_name='trains')
     departure_time = models.DateTimeField()
     arrival_time = models.DateTimeField()
 
 
 class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
 
 
 class Ticket(models.Model):
     cargo = models.IntegerField()
     seat = models.IntegerField()
-    journey = models.ForeignKey(Journey, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    journey = models.ForeignKey(Journey, on_delete=models.CASCADE, related_name='journeys')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='orders')

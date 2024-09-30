@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
+
 from rest_framework import serializers
-from .models import (
+
+from departure.models import (
     TrainType,
     Train,
     Station,

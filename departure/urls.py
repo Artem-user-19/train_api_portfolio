@@ -1,11 +1,12 @@
 from django.urls import path, include
+
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView
 )
 
-from .views import (
+from departure.views import (
     TrainTypeViewSet,
     TrainViewSet,
     StationViewSet,
@@ -15,7 +16,8 @@ from .views import (
     OrderViewSet,
     TicketViewSet,
     CountryViewSet,
-    CityViewSet, UserRegistrationView
+    CityViewSet,
+    UserRegistrationView
 )
 
 router = DefaultRouter()
