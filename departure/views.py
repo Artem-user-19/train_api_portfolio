@@ -27,7 +27,8 @@ from departure.serializers import (
     OrderSerializer,
     TicketSerializer,
     CountrySerializer,
-    CitySerializer, UserRegistrationSerializer
+    CitySerializer,
+    UserRegistrationSerializer
 )
 
 
@@ -40,6 +41,12 @@ class TrainTypeViewSet(viewsets.ModelViewSet):
 class TrainViewSet(viewsets.ModelViewSet):
     queryset = Train.objects.all()
     serializer_class = TrainSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class CountryViewSet(viewsets.ModelViewSet):
@@ -94,7 +101,6 @@ class UserRegistrationView(APIView):
 
     def post(self, request):
         serializer = UserRegistrationSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

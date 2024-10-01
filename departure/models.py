@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.contrib.auth.models import User
 
 
@@ -14,7 +13,7 @@ class Train(models.Model):
     name = models.CharField(max_length=100)
     cargo_num = models.IntegerField()
     places_in_cargo = models.IntegerField()
-    train_type = models.ForeignKey(TrainType, on_delete=models.CASCADE, related_name='trains')
+    train_type = models.ForeignKey(TrainType, on_delete=models.CASCADE, related_name='train_types')
 
     def __str__(self):
         return self.name
@@ -29,7 +28,7 @@ class Country(models.Model):
 
 class City(models.Model):
     name = models.CharField(max_length=100)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='cities')
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='countries')
 
     def __str__(self):
         return self.name
@@ -47,12 +46,12 @@ class Station(models.Model):
 class Route(models.Model):
     source = models.ForeignKey(
         Station,
-        related_name='source_station',
+        related_name='sources',
         on_delete=models.CASCADE,
     )
     destination = models.ForeignKey(
         Station,
-        related_name='destination_station',
+        related_name='destinations',
         on_delete=models.CASCADE
     )
     distance = models.IntegerField()
@@ -75,7 +74,7 @@ class Journey(models.Model):
 
 class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
 
 
 class Ticket(models.Model):
